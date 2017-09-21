@@ -1,4 +1,8 @@
 ---
-systems:
-  - alias: "myAlias"
-    uri: "http://path/to/destination/"
+erp:
+  default: "QW9_715"
+  systems:
+    - alias: "QW9_715"
+      systemId: "QW9"
+      uri: "https://erpqw9a74d7a9d1.hana.ondemand.com/"
+      sapClient: "715"

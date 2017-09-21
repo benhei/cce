@@ -6,8 +6,8 @@ general:
 steps:
   executeMaven:
 #    dockerImage: 'maven:3.5.0-jdk-8'
-    globalSettingsFile: ''
-    projectSettingsFile : ''
+#    globalSettingsFile: ''
+#    projectSettingsFile : ''
 
   deployToCfWithCli:
 #    dockerImage: 's4sdk/docker-cf-cli'
@@ -17,13 +17,13 @@ steps:
 #Stage Specific Configurations
 stages:
   staticCodeChecks:
-    findbugsExcludesFile: '' #Path to findbugs exclude file
-    pmdExcludes: '' # List or ANT style patterns
+#    findbugsExcludesFile: '' #Path to findbugs exclude file
+#    pmdExcludes: '' # List or ANT style patterns
 
-#  integrationTests:
-#    credentials:
-#      - alias: ''
-#        credentialId: ''
+  integrationTests:
+    credentials:
+      - alias: 'QW9_715'
+        credentialId: 'erp-credentials'
 
 #  s4SdkQualityChecks:
 #    jacocoExcludes:
@@ -31,11 +31,11 @@ stages:
 #    nonErpDestinations:
 #      - ''
 
-#  productionDeployment:
-#    cfTargets:
-#      - org: 'org'
-#        space: 'Productive'
-#        apiEndpoint: 'https://'
-#        appName: 'appName'
-#        manifest: 'manifest.yml'
-#        credentialsId: 'credentialsId'
+  productionDeployment:
+    cfTargets:
+      - org: 'D056324trial_trial'
+        space: 'dev'
+        apiEndpoint: 'https://api.cf.eu10.hana.ondemand.com'
+        appName: 'cce'
+        manifest: 'manifest.yml'
+        credentialsId: 'cf-trial-credentials'
