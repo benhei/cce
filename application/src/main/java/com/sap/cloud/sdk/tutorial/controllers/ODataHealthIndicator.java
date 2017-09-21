@@ -21,7 +21,7 @@ public class ODataHealthIndicator implements HealthIndicator {
 
     @Override
     public Health health() {
-        final SapClient sapClient = new SapClient("SAPCLIENT-NUMBER"); // adjust SAP client to your respective S/4HANA system
+        final SapClient sapClient = new SapClient("715"); // adjust SAP client to your respective S/4HANA system
         final String problem = checkForProblem(sapClient);
         if (problem != null) {
             return Health.down().withDetail("Error", problem).build();
