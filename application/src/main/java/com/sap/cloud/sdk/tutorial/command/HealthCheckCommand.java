@@ -2,11 +2,13 @@ package com.sap.cloud.sdk.tutorial.command;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.netflix.config.ConfigurationManager;
 
 import java.util.concurrent.TimeUnit;
 
 import com.sap.cloud.sdk.cloudplatform.cache.CacheKey;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
+import com.sap.cloud.sdk.s4hana.config.S4HanaConfig;
 import com.sap.cloud.sdk.s4hana.connectivity.CachingErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
 import com.sap.cloud.sdk.tutorial.models.CostCenterDetails;
@@ -21,6 +23,10 @@ public class HealthCheckCommand extends CachingErpCommand<Boolean>
 
     public HealthCheckCommand( final ErpConfigContext configContext ) {
         super(HealthCheckCommand.class, configContext);
+
+        ConfigurationManager.getConfigInstance().setProperty(
+                S4HanaConfig.BAPI_SERIALIZATION_STRATEGY,
+                S4HanaConfig.RemoteFunctionSerializationStrategy.JSON);
     }
 
     @Override

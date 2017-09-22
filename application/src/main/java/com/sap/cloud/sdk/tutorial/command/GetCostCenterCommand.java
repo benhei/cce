@@ -2,6 +2,7 @@ package com.sap.cloud.sdk.tutorial.command;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.netflix.config.ConfigurationManager;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQuery;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryResult;
+import com.sap.cloud.sdk.s4hana.config.S4HanaConfig;
 import com.sap.cloud.sdk.s4hana.connectivity.CachingErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
 import com.sap.cloud.sdk.s4hana.connectivity.exception.QueryExecutionException;
@@ -22,6 +24,10 @@ public class GetCostCenterCommand extends CachingErpCommand<List<CostCenterDetai
 
     public GetCostCenterCommand(final ErpConfigContext configContext) {
         super(GetCostCenterCommand.class, configContext);
+
+        ConfigurationManager.getConfigInstance().setProperty(
+                S4HanaConfig.BAPI_SERIALIZATION_STRATEGY,
+                S4HanaConfig.RemoteFunctionSerializationStrategy.JSON);
     }
 
     private static final Cache<CacheKey, List<CostCenterDetails>> cache =

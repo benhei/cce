@@ -18,8 +18,6 @@ import com.sap.cloud.sdk.s4hana.datamodel.bapi.types.SetId;
 import com.sap.cloud.sdk.s4hana.serialization.ErpBoolean;
 import com.sap.cloud.sdk.tutorial.models.CostCenterDetails;
 
-import static com.sap.cloud.sdk.s4hana.config.S4HanaConfig.BAPI_SERIALIZATION_STRATEGY;
-
 public class CreateCostCenterCommand extends ErpCommand<List<ReturnParameter>>
 {
     private final CostCenterDetails details;
@@ -30,6 +28,10 @@ public class CreateCostCenterCommand extends ErpCommand<List<ReturnParameter>>
         super(CreateCostCenterCommand.class, configContext);
         this.details = costCenterDetails;
         this.testRun = isTestRun;
+
+        ConfigurationManager.getConfigInstance().setProperty(
+                S4HanaConfig.BAPI_SERIALIZATION_STRATEGY,
+                S4HanaConfig.RemoteFunctionSerializationStrategy.JSON);
     }
 
     @Override
